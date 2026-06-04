@@ -1,349 +1,235 @@
-# ReMate — Screen Planning Blueprint
+# ReMate — UX & Visual Design Strategy
 
-13 screens, structured for the MVP demo. Planning only — no code, no implementation details.
-
----
-
-## 1. Landing Page  `/`
-
-**Purpose:** Convert first-time visitors into registered users and communicate the circular-economy value proposition.
-**Primary user goal:** Understand what ReMate does in <10 seconds and sign up or browse.
-
-**Key components:** Sticky nav, hero, live impact counter, "How it works" 3-step strip, featured material categories, sample listing cards, testimonial/persona quotes, SDG 9 badge strip, footer.
-
-**Required sections:**
-1. Hero — headline, sub-headline, dual CTA (List waste / Find materials)
-2. Live Impact Counter — total kg diverted, tonnes CO₂e saved, transactions
-3. How It Works — List → Match → Pickup → Impact
-4. Material Categories grid (Timber, Metal, Plastic, C&D, Packaging, Other)
-5. Featured Listings carousel
-6. Why ReMate (3 differentiators: Smart Match, Impact Analysis, Anticipatory)
-7. SDG 9 alignment block
-8. Footer (links, language toggle EN/BM)
-
-**Layout:** Full-width vertical stack, mobile-first single column → 2/3-col grids on desktop.
-**CTAs:** "List Your Waste", "Browse Materials", "Sign Up Free", "Login".
-**Navigation destinations:** Registration, Login, Marketplace Dashboard (guest preview), About/SDG, Material Details (via featured cards).
-**Data required:** Aggregate impact stats, featured listings (6–8), categories.
-**Flow relationships:** Entry point → Registration / Login / Marketplace Dashboard.
+Strategy only. No screens, no code. Builds on the approved product plan and 13-screen blueprint.
 
 ---
 
-## 2. Registration  `/register`
+## 1. Design Principles
 
-**Purpose:** Create a verified account with role selection.
-**Primary goal:** Sign up in under 90 seconds.
-
-**Key components:** Role selector (Generator / Seeker / Both), form fields, password strength meter, T&C checkbox, social-login buttons, language toggle.
-
-**Required sections:**
-1. Role selection (visual cards)
-2. Account form (name, email, phone, password)
-3. Optional business details (SSM number for verification badge)
-4. Location (state/city for matching)
-5. Submit + "Already have account? Login"
-
-**Layout:** Centered single-column card, progress indicator (Role → Details → Verify).
-**CTAs:** "Create Account", "Continue with Google", "Login instead".
-**Navigation:** Login, Email-verification screen, Marketplace Dashboard (post-signup).
-**Data required:** User input → user record + role + verification status.
-**Flow relationships:** From Landing/Login → into Marketplace Dashboard.
+1. **Clarity over cleverness** — every screen answers "what is this, what can I do, what happens next?" within 3 seconds. *Why:* marketplace users juggle listings, sellers, logistics; cognitive load directly kills conversion and trust.
+2. **Impact made tangible** — every transaction surfaces measurable environmental value (kg, CO₂e, equivalences). *Why:* turns abstract "sustainability" into a felt reward, reinforcing brand and SDG 9 alignment.
+3. **Trust by transparency** — verification badges, ratings, seller history, location proximity, and clear pricing/terms shown upfront. *Why:* peer-to-peer waste exchange depends on stranger-to-stranger trust; transparency is the cheapest trust currency.
+4. **Mobile-first, desktop-amplified** — designed for one-thumb use on a Malaysian construction site, then scaled up for power users (ESG officers, recyclers). *Why:* primary generators work offsite; secondary users analyze on desktop.
+5. **Calm green, not eco-cliché** — restrained green palette, generous whitespace, no leaves/recycle-arrow visual clichés. *Why:* differentiates from amateur "green" sites; signals modern infrastructure (SDG 9).
+6. **Bilingual-native (EN/BM)** — layouts accommodate ~30% text expansion for Bahasa Malaysia without breaking. *Why:* serves the actual user base, not an idealized one.
+7. **Action-oriented empty states** — never a dead end; every empty list suggests the next action. *Why:* a new two-sided marketplace will have sparse data — empty states are the product.
 
 ---
 
-## 3. Login  `/login`
+## 2. Design System
 
-**Purpose:** Authenticate returning users.
-**Primary goal:** Log in fast and land where they were last working.
+**Color tokens (semantic, oklch in code):**
 
-**Key components:** Email/password fields, social login, "Forgot password", "Remember me".
+| Token | Value | Use |
+|---|---|---|
+| `--primary` | `#059669` (emerald-600) | CTAs, active states, brand marks |
+| `--primary-foreground` | `#FFFFFF` | Text on primary |
+| `--primary-soft` | emerald-50 tint | Hover, badges, soft surfaces |
+| `--background` | `#F9FAFB` | App background |
+| `--surface` | `#FFFFFF` | Cards, modals, inputs |
+| `--foreground` | `#1F2937` | Body text |
+| `--muted-foreground` | slate-500 | Secondary text |
+| `--border` | slate-200 | Dividers, input borders |
+| `--success` | emerald-600 (same as primary) | Confirmations |
+| `--warning` | amber-500 | Pickup-soon, low-stock |
+| `--destructive` | rose-600 | Cancel, delete |
+| `--impact` | teal-600 | Reserved for impact metrics only |
+| `--condition-a` / `--b` / `--c` | emerald / amber / slate | Material condition grades |
 
-**Required sections:** Form, secondary actions (forgot/register), language toggle.
-**Layout:** Centered card, same shell as Registration for consistency.
-**CTAs:** "Login", "Forgot Password", "Create Account".
-**Navigation:** Marketplace Dashboard on success; Registration; Password reset.
-**Data required:** Credentials → session token.
-**Flow relationships:** Entry → Dashboard.
+*Why a separate `--impact` token:* impact numbers must visually pop against generic UI greens; reserving one teal-leaning hue makes "5.2 kg CO₂e saved" feel like a distinct currency, not a button color.
 
----
+**Elevation:** 3 levels only — flat (`--surface`), raised card (soft shadow), modal/sheet (stronger shadow + backdrop). *Why:* fewer levels = faster scanning; Airbnb/Stripe both restrict elevation depth.
 
-## 4. Marketplace Dashboard  `/dashboard`
+**Radius:** 12px cards, 8px inputs/buttons, 999px pills/badges. *Why:* soft enough to feel friendly (Airbnb), sharp enough to feel infrastructural (Stripe).
 
-**Purpose:** Personalized home hub showing matches, listings, activity, and quick actions.
-**Primary goal:** See what's relevant *to me* right now and act on it.
+**Spacing scale:** Tailwind default (4-pt grid). Section vertical rhythm 64/96/128 on desktop, 40/56/72 on mobile.
 
-**Key components:** Top nav with search bar, role-aware widgets, smart match feed, quick-action tiles, activity timeline, mini impact summary.
+**Iconography:** Lucide, 1.5px stroke, single weight throughout. No filled icons except for active tab states. *Why:* consistency > expressiveness for a utility marketplace.
 
-**Required sections:**
-1. Greeting + role badge + quick stats (active listings / matches / pending pickups)
-2. Quick Actions (Create Listing, Search, View Map, Wishlist)
-3. Smart Matches feed (ranked cards with match %)
-4. Recent activity / messages snippet
-5. Mini Impact widget (link to full Sustainability Dashboard)
-6. Recommended categories
-
-**Layout:** Sidebar nav (desktop) / bottom-tab nav (mobile); main content 2-column on desktop (feed + sidebar widgets).
-**CTAs:** "Create Listing", "Browse All", "View Matches", "Open Map".
-**Navigation:** Search, Map View, Material Details, Create Listing, Profile, Sustainability Dashboard, Cart.
-**Data required:** User profile, smart matches, recent listings, notifications, impact summary.
-**Flow relationships:** Central hub — connects to every authenticated screen.
+**Motion:** 150–200ms ease-out for micro; 300ms for page/sheet transitions; impact counters animate up over ~800ms. *Why:* fast enough to feel responsive, slow enough to make impact numbers feel earned.
 
 ---
 
-## 5. Search & Advanced Filters  `/search`
+## 3. Typography Hierarchy
 
-**Purpose:** Let seekers find materials precisely.
-**Primary goal:** Narrow thousands of listings to the right few.
+**Family:** Inter (UI) + Inter Display weights for hero. One family = one network request, perfect BM/EN coverage, neutral and infrastructural.
 
-**Key components:** Search bar, filter sidebar/sheet, sort dropdown, results grid, save-search button, toggle (List / Map).
+**Scale (mobile → desktop):**
 
-**Required sections:**
-1. Search input + recent searches
-2. Filters: category, sub-type, condition grade (A/B/C), quantity range, distance radius, price (free/negotiable/fixed), availability window, seller rating
-3. Active filter chips
-4. Results grid with pagination/infinite scroll
-5. Empty/zero-state with smart suggestions
-6. Save Search CTA
+| Role | Size | Weight | Tracking |
+|---|---|---|---|
+| Display (hero) | 36 → 56px | 600 | -2% |
+| H1 (page title) | 28 → 36px | 600 | -1% |
+| H2 (section) | 22 → 28px | 600 | -1% |
+| H3 (card title) | 18 → 20px | 600 | 0 |
+| Body | 15 → 16px | 400 | 0 |
+| Body-small (meta) | 13 → 14px | 400 | 0 |
+| Label/caption | 12 → 12px | 500 uppercase | +4% |
+| Metric (KPI) | 32 → 48px | 700 tabular-nums | -2% |
+| Metric-small | 20 → 24px | 700 tabular-nums | -1% |
 
-**Layout:** Left filter panel (desktop) / slide-up sheet (mobile); results in responsive card grid.
-**CTAs:** "Apply Filters", "Save Search", "Switch to Map", "Clear All".
-**Navigation:** Material Details, Map View, Cart (add quick-reserve).
-**Data required:** Listings index, filter taxonomy, user wishlist (for match scoring).
-**Flow relationships:** Dashboard → Search → Material Details → Cart.
-
----
-
-## 6. Geolocation Map View  `/map`
-
-**Purpose:** Visualize listings spatially to optimize pickup logistics.
-**Primary goal:** Find nearby materials and plan routes.
-
-**Key components:** Full-screen map, geo-clustered pins color-coded by category, pin popovers, filter bar overlay, list-toggle, "Use my location", radius slider.
-
-**Required sections:**
-1. Map canvas
-2. Top filter overlay (category, distance)
-3. Pin detail popover (thumbnail, title, distance, quantity, condition, "View" / "Reserve")
-4. Bottom drawer: list of pins in current viewport
-5. Heatmap toggle (Future: demand density)
-
-**Layout:** Map fills viewport; floating UI panels overlay.
-**CTAs:** "Use My Location", "View Listing", "Reserve", "Switch to List".
-**Navigation:** Material Details, Search, Cart.
-**Data required:** Geo-tagged listings, user location, category taxonomy.
-**Flow relationships:** Search ↔ Map (same data, two views) → Material Details.
+*Why tabular-nums for metrics:* KPI tiles and impact counters must align vertically across multiple cards — proportional digits look chaotic.
+*Why a separate metric scale:* impact numbers are the product, not just text — Stripe-style numeric emphasis.
 
 ---
 
-## 7. Material Details  `/listing/:id`
+## 4. Layout Framework
 
-**Purpose:** Provide full information for a reservation decision.
-**Primary goal:** Decide whether to reserve / add to cart.
+- **Grid:** 12-column desktop, 8px gutter base, max content width 1280px (wider 1440px for Sustainability Dashboard charts).
+- **Breakpoints:** sm 640 / md 768 / lg 1024 / xl 1280 / 2xl 1536.
+- **Two-column patterns:** detail screens use 7/5 split (content/sticky aside); cart/checkout use 8/4 with sticky summary right.
+- **Dashboard grid:** 4 KPI tiles per row desktop → 2×2 tablet → stacked mobile; charts span 6 or 12 cols.
+- **Container padding:** 16 mobile / 24 tablet / 32 desktop; never edge-to-edge content on desktop.
+- **Vertical rhythm:** consistent 8/12/16/24/32/48/64 spacing tokens — no arbitrary margins.
 
-**Key components:** Photo gallery, title, key specs panel, seller card, location map snippet, projected impact preview, similar listings, sticky action bar.
-
-**Required sections:**
-1. Photo gallery (≥3 images, zoomable)
-2. Title + category + condition grade badge
-3. Specs: quantity, dimensions, material sub-type, price/free, availability window
-4. Description
-5. Seller card (name, verification badge, rating, response time, message button)
-6. Pickup location (map snippet + general area, exact on reservation)
-7. **Projected Impact panel** — "Reusing this saves X kg CO₂e, Y kg landfill"
-8. Similar / recommended listings
-9. Sticky action bar: Add to Cart / Reserve / Message
-
-**Layout:** Two-column desktop (gallery left, info right); single-column mobile with sticky CTA.
-**CTAs:** "Add to Cart", "Reserve Now", "Message Seller", "Save".
-**Navigation:** Cart, Chat thread, Seller Profile, Map View.
-**Data required:** Listing record, seller profile, impact factors, similar listings.
-**Flow relationships:** Search/Map/Dashboard → Material Details → Cart → Checkout.
+*Why these specifics:* Airbnb/Etsy-style breathing room signals quality; the 7/5 split keeps detail+action visible without scrolling on laptops.
 
 ---
 
-## 8. Create Waste Listing  `/listing/new`
+## 5. Navigation Strategy
 
-**Purpose:** Let generators publish a listing quickly.
-**Primary goal:** Publish in under 60 seconds.
+**Authenticated shell:**
+- **Desktop:** persistent left sidebar (64px collapsed / 240px expanded) — Dashboard, Search, Map, My Listings, Cart, Impact, Profile. Top bar = global search + create-listing button + notifications + avatar.
+- **Mobile:** bottom tab bar (5 items max: Home, Search, Create [center FAB], Impact, Profile). Top app bar = contextual title + notifications. Cart accessed via top-right icon with badge.
+- **Tablet:** rail nav (icon-only sidebar) + top bar — bridges the two.
 
-**Key components:** Multi-step wizard, photo uploader (with compression preview), category auto-suggest, quantity/unit selector, pickup scheduler, recurring toggle, preview pane.
+**Public shell (Landing/Auth):** transparent top nav over hero, sticky on scroll; mobile = hamburger sheet.
 
-**Required sections (4 steps):**
-1. **Photos & Category** — upload ≥3 photos, auto-detected category (editable)
-2. **Specs** — quantity + unit, condition grade A/B/C, material sub-type, description
-3. **Pickup & Price** — address, availability window, price type (free/negotiable/fixed), recurring schedule
-4. **Review & Publish** — preview card + projected impact estimate
+**Breadcrumbs:** desktop only, on deep screens (Material Details, Settings sub-pages). Mobile uses back-arrow with screen title.
 
-**Layout:** Step progress bar at top; one section per step; persistent "Back / Next" footer.
-**CTAs:** "Next", "Back", "Save Draft", "Publish Listing".
-**Navigation:** Dashboard, My Listings, the newly created Material Details.
-**Data required:** Categories, condition grades, impact factors, user address book.
-**Flow relationships:** Dashboard → Create → Material Details (auto-redirect after publish).
+**Global search:** ⌘K palette on desktop for power users (categories, listings, sellers, my pages). *Why:* recyclers and ESG officers spend hours on the platform — keyboard nav is a retention feature.
+
+*Why a center FAB for Create:* listing is the single most valuable generator action; visual gravity = behavioral nudge.
 
 ---
 
-## 9. User Profile  `/profile`
+## 6. Card Design Guidelines
 
-**Purpose:** Manage identity, verification, preferences, and view public reputation.
-**Primary goal:** Build trust and control account settings.
+**Anatomy (listing card):**
+1. 4:3 image (lazy, blurhash placeholder)
+2. Condition badge top-left (A/B/C, color-coded)
+3. Save (heart) icon top-right
+4. Title (1 line, truncate)
+5. Material category + quantity meta row
+6. Distance + price row (price = "Free" / "RM X" / "Negotiable")
+7. Impact hint footer: "Reuse saves ~X kg CO₂e" in `--impact` color, small caps label
+8. Hover (desktop): gentle lift (2px) + shadow deepen, image zooms 1.03
 
-**Key components:** Avatar, name, role badge, verification status, ratings summary, tabs (Overview / Listings / Reviews / Settings), language toggle, logout.
+*Why the impact footer on every card:* turns browsing into a constant brand reinforcement loop — every scroll teaches the user that this platform is about measurable impact.
 
-**Required sections:**
-1. Profile header (avatar, name, badges, rating, member since)
-2. Tabs:
-   - Overview: bio, location, mini impact stats
-   - My Listings (Generator) / Wishlist (Seeker)
-   - Reviews received
-   - Settings: account, notifications, language EN/BM, privacy, verification upload
-3. Logout
+**Variants:**
+- **Compact** (search results grid): smaller image, no impact hint footer to keep density.
+- **Featured** (landing/dashboard): larger image, seller avatar + verification badge inline.
+- **Match card** (Smart Match feed): adds a match-% chip in primary color and "why matched" 1-liner.
 
-**Layout:** Header + tabbed content; settings as forms in cards.
-**CTAs:** "Edit Profile", "Verify Business", "Save Changes", "Logout".
-**Navigation:** Sustainability Dashboard, My Listings, Login (post-logout).
-**Data required:** User record, listings, reviews, notification prefs.
-**Flow relationships:** Accessible from any authenticated screen via avatar menu.
-
----
-
-## 10. Sustainability Dashboard  `/impact`
-
-**Purpose:** Visualize personal/business environmental impact — the SDG 9 showcase screen.
-**Primary goal:** Quantify, reflect on, and share contribution.
-
-**Key components:** KPI tiles, time-range filter, charts, equivalence translations, shareable Impact Card, export button, anticipatory forecast panel.
-
-**Required sections:**
-1. **KPI tiles:** kg diverted, tonnes CO₂e avoided, transactions, water/energy avoided
-2. **Time range filter** (week / month / quarter / year / all)
-3. **Charts:** stacked bar (impact over time), donut (impact by material category), line (cumulative diversion)
-4. **Equivalences:** "= 12 trees planted", "= 4 months household electricity"
-5. **Anticipatory panel (SC2):** projected next-month impact based on activity trend; supply/demand forecast
-6. **Shareable Impact Card** — generates an image for LinkedIn/Instagram
-7. **ESG Export** — PDF/CSV download (business accounts)
-
-**Layout:** Dashboard grid — KPI row → charts row → forecast → share/export.
-**CTAs:** "Share Impact Card", "Export ESG Report", "View Forecast".
-**Navigation:** Profile, Dashboard.
-**Data required:** Completed transactions, material impact factors, forecast model output.
-**Flow relationships:** Accessible from Dashboard, Profile, and post-transaction Success screen.
+**Consistency rules:** all cards share radius (12px), border (1px slate-200), padding (16px), and shadow tier — variation only in content, not chrome.
 
 ---
 
-## 11. Materials Request Cart  `/cart`
+## 7. Marketplace Design Language
 
-**Purpose:** Hold one or multiple reservation requests before committing to checkout.
-**Primary goal:** Review, adjust, and confirm pickup intent.
-
-**Key components:** Item list with thumbnails, per-item quantity/notes, per-item pickup-slot picker, per-item seller info, combined impact preview, summary panel.
-
-**Required sections:**
-1. Cart items (thumbnail, title, qty requested, seller, distance, price)
-2. Per-item controls: edit quantity, choose pickup slot, message seller, remove
-3. Grouping by seller (multiple sellers = multiple pickup coordinations)
-4. **Combined Impact Preview** — total kg + CO₂e if reservations complete
-5. Summary panel: total items, total cost (if any), # of pickups required
-6. Notes field
-7. Proceed CTA
-
-**Layout:** Two-column desktop (items list left, summary sticky right); single-column mobile with sticky bottom summary.
-**CTAs:** "Proceed to Checkout", "Continue Browsing", "Remove", "Save for Later".
-**Navigation:** Checkout, Material Details, Search.
-**Data required:** Cart state, listings, seller availability slots, impact factors.
-**Flow relationships:** Material Details → Cart → Checkout.
+- **Density:** medium — Etsy-style 3-col desktop / 2-col tablet / 1-col mobile result grid. Not Pinterest masonry (item comparison needs uniform card heights).
+- **Filtering pattern:** Airbnb-style — chip row of active filters above results + collapsible left panel (desktop) / bottom sheet (mobile).
+- **List ↔ Map toggle:** persistent toggle in result header (Search ↔ Map). Map view = Airbnb pattern — pins linked to visible card row; hovering a card highlights its pin.
+- **Smart Match surfacing:** a horizontal "Matched for you" rail at top of Dashboard and Search results, visually distinct (soft primary background tint, match-% chip on each card).
+- **Seller trust block:** wherever a seller appears, show avatar + name + verification badge + star rating + response time in that exact order. *Why:* trust signals only work when they're predictable across the product.
+- **Photography style guidance:** real, slightly imperfect photos of materials (not stock perfection). Earthy, well-lit, in-context. Communicates authenticity and ground-truth supply.
 
 ---
 
-## 12. Checkout  `/checkout`
+## 8. Sustainability Dashboard Design Language
 
-**Purpose:** Confirm reservation(s), select payment (if applicable), and lock in pickup slots.
-**Primary goal:** Commit confidently with all details visible.
+This is the SDG 9 showcase — different visual register from the marketplace, signaling "analytics", not "shopping".
 
-**Key components:** Order review, pickup details per seller, payment method selector (if priced), terms acceptance, final impact projection, place-order CTA.
-
-**Required sections:**
-1. Reservation summary (items grouped by seller)
-2. Pickup schedule confirmation per seller (date, time, contact person, vehicle type)
-3. Delivery option (self-pickup / request logistics partner — future)
-4. Payment (if listings have price): method, billing details
-5. Terms & conditions + sustainability commitment checkbox
-6. **Final Impact Projection** (highlighted)
-7. Place Order CTA
-
-**Layout:** Linear step-down single column on mobile; two-column desktop with sticky summary.
-**CTAs:** "Confirm Reservation", "Back to Cart", "Edit Pickup".
-**Navigation:** Cart (back), Transaction Success (forward).
-**Data required:** Cart, user payment methods, seller schedules, T&C version.
-**Flow relationships:** Cart → Checkout → Transaction Success.
+- **Layout:** 4-KPI top row, 2 charts middle row, anticipatory forecast band, share/export footer.
+- **KPI tiles:** white surface, large tabular-nums metric in `--impact` teal, label in uppercase small caps, delta vs previous period in green/red micro-pill, sparkline at bottom.
+- **Charts:** stacked bar (impact over time, by category), donut (category share), cumulative line (lifetime diversion). Two-color palette per chart: `--impact` teal + neutral slate fills, no rainbow categorical colors. *Why:* keeps focus on the message ("we're going up"), not on decoding a legend.
+- **Equivalences:** rendered as illustrated micro-cards ("= 12 trees / = 4 months household electricity / = 38 km not driven"). Iconography from Lucide, single-stroke, no emoji.
+- **Anticipatory panel:** visually separated by a soft tinted background band, labeled "Forecast" with a small ✦ marker; dashed projection lines distinguish predicted from actual. *Why:* judges/lecturers immediately see the SC2 Anticipatory Thinking layer as a deliberate feature, not a generic chart.
+- **Shareable Impact Card:** 1:1 social-export composition with brand mark, user name, headline metric, and equivalence. *Why:* every share is free top-of-funnel marketing tied to a real impact claim.
 
 ---
 
-## 13. Transaction Success  `/success/:transactionId`
+## 9. Form Design Standards
 
-**Purpose:** Confirm reservation, reinforce impact, drive next action.
-**Primary goal:** Feel rewarded and know what happens next.
-
-**Key components:** Success illustration/animation, transaction ID, reservation summary, **Impact gained** highlight, next-step checklist, shareable Impact Card, related actions.
-
-**Required sections:**
-1. Confirmation header ("Reservation confirmed!")
-2. Transaction details (ID, items, pickup schedule, seller contact)
-3. **Impact Earned panel** — kg diverted + CO₂e saved (animated counter)
-4. Next steps checklist (Contact seller / Prepare transport / Confirm pickup / Leave review)
-5. Shareable Impact Card
-6. CTAs to continue journey
-
-**Layout:** Centered celebratory layout, single column.
-**CTAs:** "View Reservation", "Share Impact", "Back to Dashboard", "Browse More".
-**Navigation:** Dashboard, Sustainability Dashboard, Chat with seller, Material Details.
-**Data required:** Transaction record, computed impact, seller contact.
-**Flow relationships:** Checkout → Success → Dashboard / Sustainability Dashboard / Chat.
+- **One column always.** Fields stack vertically; multi-column only for paired short fields (city/postcode).
+- **Labels above inputs**, never floating-only or placeholder-only. *Why:* placeholder-as-label fails accessibility and BM translation.
+- **Helper text below**, error replaces helper in destructive color with icon prefix.
+- **Required marker** = subtle "Required" text label, not asterisks. *Why:* clearer for non-technical users.
+- **Multi-step (Create Listing):** progress bar with step labels, persistent Back/Next footer, autosave draft every step, "Save draft" always available.
+- **Inputs:** 44px min height (touch target), 8px radius, 1px slate-200 border, 2px primary focus ring with 2px offset.
+- **Buttons:** primary (filled emerald), secondary (outline), ghost (text), destructive (rose). One primary CTA per screen — never two competing.
+- **File upload:** drag-drop zone with mobile-camera fallback; show compression preview + thumbnail; allow reorder. *Why:* generator photos taken on dusty sites; the upload experience must forgive bad input.
+- **Inline validation:** on blur, never on keystroke (except password strength).
+- **Smart defaults:** prefill location from profile, suggest category from photo (AI), default availability to "next 7 days".
 
 ---
 
-## Cross-screen Flow Summary
+## 10. Accessibility Standards
 
-```
-Landing ─► Register ─► Dashboard ─┬─► Search ─► Material Details ─► Cart ─► Checkout ─► Success
-        └► Login ────────┘         ├─► Map View ────┘                                      │
-                                    ├─► Create Listing                                      │
-                                    ├─► Profile                                             │
-                                    └─► Sustainability Dashboard ◄────────────────────────┘
-```
+Target WCAG 2.1 AA throughout.
 
----
+- **Color contrast:** body text ≥ 4.5:1, large text ≥ 3:1. Primary emerald-600 on white passes; never use primary on `--background` for body text.
+- **Never color alone:** condition grades, impact deltas, statuses combine color + icon + label.
+- **Focus visible:** 2px primary ring + 2px offset on every interactive element, including cards.
+- **Touch targets:** ≥ 44×44px on mobile (use shadcn defaults; icon buttons get `min-h-11 min-w-11`).
+- **Semantic HTML:** one `<main>` per page (in root layout), proper h1→h6 order, `<nav>`/`<aside>`/`<section>` landmarks.
+- **Icon-only buttons:** every one gets `aria-label`. *Why:* the most common shadcn a11y gap.
+- **Forms:** every input has an associated `<label>`, errors use `aria-describedby` + `aria-invalid`.
+- **Images:** every listing image has alt = "{material type}, {condition}, {quantity}"; decorative images use `alt=""`.
+- **Reduced motion:** respect `prefers-reduced-motion` — disable parallax, counter animations, hover lifts.
+- **Keyboard:** full keyboard navigation; ⌘K palette; ESC closes sheets/modals.
+- **Language attribute:** `<html lang>` toggles with EN/BM selection.
+- **Screen reader live regions:** cart badge updates, toast notifications, impact-counter completion announced politely.
 
-## Prioritization
-
-**Highest priority for MVP (must demo):**
-1. Landing — first impression
-2. Registration
-3. Login
-4. Marketplace Dashboard
-5. Search & Advanced Filters
-6. Material Details
-7. Create Waste Listing
-8. Cart
-9. Checkout
-10. Transaction Success
-11. Sustainability Dashboard
-
-**Secondary for MVP polish:** User Profile, Geolocation Map View.
-
-**Strongest presentation impact (judges/lecturer "wow" screens):**
-1. **Sustainability Dashboard** — visual proof of measurable SDG impact
-2. **Landing Page** — live impact counter sets the tone
-3. **Geolocation Map View** — visually arresting, demonstrates spatial intelligence
-4. **Transaction Success** — emotional payoff, shareable card moment
-5. **Material Details** — projected-impact panel makes the value tangible
-
-**Best SDG 9 alignment demonstration (Industry, Innovation, Infrastructure):**
-1. **Sustainability Dashboard** — quantifies industrial-material reuse; ESG export = infrastructure for circular reporting
-2. **Smart-Match feed on Marketplace Dashboard** — innovation in resource allocation
-3. **Map View with anticipatory heatmap** — infrastructure-level visibility of material flows
-4. **Create Waste Listing (recurring schedules)** — industrial process integration
-5. **Transaction Success Impact Earned panel** — closes the loop, makes infrastructure-scale benefit visible per transaction
+*Why this rigor:* a public marketplace will be used by older generators, low-vision ESG analysts, and visitors on poor mobile networks; accessibility = reachable market.
 
 ---
 
-**Next step after approval:** generate 3 design directions (palette, typography, composition) and have the user select one before building any screens.
+## 11. Responsive Desktop Experience Strategy
+
+Mobile-first, but desktop is not a stretched mobile — it earns its own layout.
+
+- **Desktop-only enhancements:**
+  - Persistent sidebar nav with collapse
+  - ⌘K command palette
+  - Hover-preview on listing cards (peek details without click)
+  - Linked map ↔ list interaction on Search
+  - Multi-pane Sustainability Dashboard with larger charts
+  - Drag-and-drop in Create Listing photo step
+  - Inline detail drawer for listings inside search (avoid full nav)
+- **Tablet:** rail nav, 2-column grids, sheets instead of modals.
+- **Mobile:** bottom tabs + FAB, sheets for filters, sticky bottom CTAs on detail/cart/checkout.
+- **Wide screens (>1440px):** cap content at 1280–1440px and center; never edge-to-edge text.
+- **Performance budget:** LCP < 2.5s on 4G, images responsive (srcset), route-level code splitting, blurhash placeholders. *Why:* perceived speed is a trust signal.
+
+---
+
+## 12. User Experience Guidelines
+
+- **First 10 seconds rule:** Landing page must communicate what + for whom + proof in 10 seconds. Hero headline + dual CTA + live impact counter.
+- **Progressive disclosure:** never show 12 filters when 4 are used 90% of the time; "More filters" reveals the rest.
+- **Optimistic UI:** Save, Add-to-cart, Reserve respond instantly with rollback on error. *Why:* the platform feels fast even on poor JB/KL mobile networks.
+- **Friction where it matters:** Checkout requires explicit pickup-slot confirmation and a sustainability commitment checkbox — *intentional* friction that reinforces brand values and prevents no-shows.
+- **Anti-friction elsewhere:** signup ≤ 90s, listing creation ≤ 60s, search-to-reserve ≤ 3 taps.
+- **Empty states as onboarding:** every empty list = headline + illustration + primary action + secondary "see example".
+- **Toast vs modal:** success/info = toast (3s, top-right); destructive confirmations = modal; multi-step input = sheet/page.
+- **Error tone:** never blame the user. "Couldn't reach the server — try again" not "Invalid request".
+- **Loading states:** skeleton screens matching final layout (not spinners) for lists/cards; spinners only for actions <2s.
+- **Trust micro-moments:** verification badge, "responds in ~2h", "12 successful pickups", "Member since 2025" — sprinkled, never bunched.
+- **Sustainability reinforcement loop:** every meaningful action ends with an impact moment — listing published ("Could divert ~X kg from landfill"), reservation made ("Locks in ~Y kg CO₂e saved"), pickup confirmed ("Impact added to your dashboard"). *Why:* turns transactional behavior into identity behavior.
+- **Bilingual UX:** language toggle persistent in footer + profile settings; key terms (Smart Match, Impact, Reserve) keep English to preserve product identity; descriptive copy localizes fully.
+- **Onboarding:** role-specific 3-step tour after signup (Generator: list → match → impact; Seeker: search → reserve → impact). Skippable.
+
+---
+
+## Why this strategy works
+
+- **Usability:** shadcn primitives + restrained tokens + predictable navigation + WCAG AA = low cognitive load and broad reach.
+- **Trust:** transparent seller blocks, verification badges, consistent card chrome, calm color palette, no dark patterns at checkout — reads as a real piece of infrastructure (Stripe-grade), not a hobby project.
+- **Sustainability branding:** restrained green + reserved `--impact` token + per-card impact hint + dashboard as showcase + reinforcement loop = sustainability felt at every step, never preached.
+- **Demo impact:** Sustainability Dashboard, live impact counters, anticipatory forecast band, and shareable Impact Card give clear "wow" moments for SDG 9 evaluation.
+
+---
+
+**Next step after approval:** generate 3 rendered design directions (locked tokens: emerald `#059669`, Inter, mobile-first 12-col) and have the user pick one before building MVP screens.
