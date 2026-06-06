@@ -160,7 +160,7 @@ function MaterialDetailsPage() {
                       {listing.provider.name
                         .split(" ")
                         .slice(0, 2)
-                        .map((s) => s[0])
+                        .map((s: string) => s[0])
                         .join("")}
                     </div>
                     <div>
