@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as MyListingsRouteImport } from './routes/my-listings'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as CreateListingRouteImport } from './routes/create-listing'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MaterialIdRouteImport } from './routes/material.$id'
 
@@ -26,6 +28,11 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MyListingsRoute = MyListingsRouteImport.update({
+  id: '/my-listings',
+  path: '/my-listings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarketplaceRoute = MarketplaceRouteImport.update({
   id: '/marketplace',
   path: '/marketplace',
@@ -34,6 +41,11 @@ const MarketplaceRoute = MarketplaceRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateListingRoute = CreateListingRouteImport.update({
+  id: '/create-listing',
+  path: '/create-listing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -49,16 +61,20 @@ const MaterialIdRoute = MaterialIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/create-listing': typeof CreateListingRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
+  '/my-listings': typeof MyListingsRoute
   '/register': typeof RegisterRoute
   '/search': typeof SearchRoute
   '/material/$id': typeof MaterialIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/create-listing': typeof CreateListingRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
+  '/my-listings': typeof MyListingsRoute
   '/register': typeof RegisterRoute
   '/search': typeof SearchRoute
   '/material/$id': typeof MaterialIdRoute
@@ -66,8 +82,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/create-listing': typeof CreateListingRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
+  '/my-listings': typeof MyListingsRoute
   '/register': typeof RegisterRoute
   '/search': typeof SearchRoute
   '/material/$id': typeof MaterialIdRoute
@@ -76,24 +94,30 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/create-listing'
     | '/login'
     | '/marketplace'
+    | '/my-listings'
     | '/register'
     | '/search'
     | '/material/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/create-listing'
     | '/login'
     | '/marketplace'
+    | '/my-listings'
     | '/register'
     | '/search'
     | '/material/$id'
   id:
     | '__root__'
     | '/'
+    | '/create-listing'
     | '/login'
     | '/marketplace'
+    | '/my-listings'
     | '/register'
     | '/search'
     | '/material/$id'
@@ -101,8 +125,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CreateListingRoute: typeof CreateListingRoute
   LoginRoute: typeof LoginRoute
   MarketplaceRoute: typeof MarketplaceRoute
+  MyListingsRoute: typeof MyListingsRoute
   RegisterRoute: typeof RegisterRoute
   SearchRoute: typeof SearchRoute
   MaterialIdRoute: typeof MaterialIdRoute
@@ -124,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/my-listings': {
+      id: '/my-listings'
+      path: '/my-listings'
+      fullPath: '/my-listings'
+      preLoaderRoute: typeof MyListingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/marketplace': {
       id: '/marketplace'
       path: '/marketplace'
@@ -136,6 +169,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/create-listing': {
+      id: '/create-listing'
+      path: '/create-listing'
+      fullPath: '/create-listing'
+      preLoaderRoute: typeof CreateListingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -157,8 +197,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CreateListingRoute: CreateListingRoute,
   LoginRoute: LoginRoute,
   MarketplaceRoute: MarketplaceRoute,
+  MyListingsRoute: MyListingsRoute,
   RegisterRoute: RegisterRoute,
   SearchRoute: SearchRoute,
   MaterialIdRoute: MaterialIdRoute,
@@ -166,3 +208,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
