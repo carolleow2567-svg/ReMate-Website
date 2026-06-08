@@ -10,11 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SustainabilityRouteImport } from './routes/sustainability'
+import { Route as SmartMatchesRouteImport } from './routes/smart-matches'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as MyListingsRouteImport } from './routes/my-listings'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
+import { Route as MapRouteImport } from './routes/map'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as CreateListingRouteImport } from './routes/create-listing'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout-success'
@@ -26,6 +28,11 @@ import { Route as MaterialIdRouteImport } from './routes/material.$id'
 const SustainabilityRoute = SustainabilityRouteImport.update({
   id: '/sustainability',
   path: '/sustainability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SmartMatchesRoute = SmartMatchesRouteImport.update({
+  id: '/smart-matches',
+  path: '/smart-matches',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SearchRoute = SearchRouteImport.update({
@@ -51,6 +58,11 @@ const MyListingsRoute = MyListingsRouteImport.update({
 const MarketplaceRoute = MarketplaceRouteImport.update({
   id: '/marketplace',
   path: '/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapRoute = MapRouteImport.update({
+  id: '/map',
+  path: '/map',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -96,11 +108,13 @@ export interface FileRoutesByFullPath {
   '/checkout-success': typeof CheckoutSuccessRoute
   '/create-listing': typeof CreateListingRoute
   '/login': typeof LoginRoute
+  '/map': typeof MapRoute
   '/marketplace': typeof MarketplaceRoute
   '/my-listings': typeof MyListingsRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/search': typeof SearchRoute
+  '/smart-matches': typeof SmartMatchesRoute
   '/sustainability': typeof SustainabilityRoute
   '/material/$id': typeof MaterialIdRoute
 }
@@ -111,11 +125,13 @@ export interface FileRoutesByTo {
   '/checkout-success': typeof CheckoutSuccessRoute
   '/create-listing': typeof CreateListingRoute
   '/login': typeof LoginRoute
+  '/map': typeof MapRoute
   '/marketplace': typeof MarketplaceRoute
   '/my-listings': typeof MyListingsRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/search': typeof SearchRoute
+  '/smart-matches': typeof SmartMatchesRoute
   '/sustainability': typeof SustainabilityRoute
   '/material/$id': typeof MaterialIdRoute
 }
@@ -127,11 +143,13 @@ export interface FileRoutesById {
   '/checkout-success': typeof CheckoutSuccessRoute
   '/create-listing': typeof CreateListingRoute
   '/login': typeof LoginRoute
+  '/map': typeof MapRoute
   '/marketplace': typeof MarketplaceRoute
   '/my-listings': typeof MyListingsRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/search': typeof SearchRoute
+  '/smart-matches': typeof SmartMatchesRoute
   '/sustainability': typeof SustainabilityRoute
   '/material/$id': typeof MaterialIdRoute
 }
@@ -144,11 +162,13 @@ export interface FileRouteTypes {
     | '/checkout-success'
     | '/create-listing'
     | '/login'
+    | '/map'
     | '/marketplace'
     | '/my-listings'
     | '/profile'
     | '/register'
     | '/search'
+    | '/smart-matches'
     | '/sustainability'
     | '/material/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -159,11 +179,13 @@ export interface FileRouteTypes {
     | '/checkout-success'
     | '/create-listing'
     | '/login'
+    | '/map'
     | '/marketplace'
     | '/my-listings'
     | '/profile'
     | '/register'
     | '/search'
+    | '/smart-matches'
     | '/sustainability'
     | '/material/$id'
   id:
@@ -174,11 +196,13 @@ export interface FileRouteTypes {
     | '/checkout-success'
     | '/create-listing'
     | '/login'
+    | '/map'
     | '/marketplace'
     | '/my-listings'
     | '/profile'
     | '/register'
     | '/search'
+    | '/smart-matches'
     | '/sustainability'
     | '/material/$id'
   fileRoutesById: FileRoutesById
@@ -190,11 +214,13 @@ export interface RootRouteChildren {
   CheckoutSuccessRoute: typeof CheckoutSuccessRoute
   CreateListingRoute: typeof CreateListingRoute
   LoginRoute: typeof LoginRoute
+  MapRoute: typeof MapRoute
   MarketplaceRoute: typeof MarketplaceRoute
   MyListingsRoute: typeof MyListingsRoute
   ProfileRoute: typeof ProfileRoute
   RegisterRoute: typeof RegisterRoute
   SearchRoute: typeof SearchRoute
+  SmartMatchesRoute: typeof SmartMatchesRoute
   SustainabilityRoute: typeof SustainabilityRoute
   MaterialIdRoute: typeof MaterialIdRoute
 }
@@ -206,6 +232,13 @@ declare module '@tanstack/react-router' {
       path: '/sustainability'
       fullPath: '/sustainability'
       preLoaderRoute: typeof SustainabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/smart-matches': {
+      id: '/smart-matches'
+      path: '/smart-matches'
+      fullPath: '/smart-matches'
+      preLoaderRoute: typeof SmartMatchesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/search': {
@@ -241,6 +274,13 @@ declare module '@tanstack/react-router' {
       path: '/marketplace'
       fullPath: '/marketplace'
       preLoaderRoute: typeof MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/map': {
+      id: '/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -302,14 +342,26 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutSuccessRoute: CheckoutSuccessRoute,
   CreateListingRoute: CreateListingRoute,
   LoginRoute: LoginRoute,
+  MapRoute: MapRoute,
   MarketplaceRoute: MarketplaceRoute,
   MyListingsRoute: MyListingsRoute,
   ProfileRoute: ProfileRoute,
   RegisterRoute: RegisterRoute,
   SearchRoute: SearchRoute,
+  SmartMatchesRoute: SmartMatchesRoute,
   SustainabilityRoute: SustainabilityRoute,
   MaterialIdRoute: MaterialIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
