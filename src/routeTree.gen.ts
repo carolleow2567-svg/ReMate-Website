@@ -17,6 +17,9 @@ import { Route as MyListingsRouteImport } from './routes/my-listings'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as CreateListingRouteImport } from './routes/create-listing'
+import { Route as CheckoutSuccessRouteImport } from './routes/checkout-success'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MaterialIdRouteImport } from './routes/material.$id'
 
@@ -60,6 +63,21 @@ const CreateListingRoute = CreateListingRouteImport.update({
   path: '/create-listing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
+  id: '/checkout-success',
+  path: '/checkout-success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -73,6 +91,9 @@ const MaterialIdRoute = MaterialIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/checkout-success': typeof CheckoutSuccessRoute
   '/create-listing': typeof CreateListingRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
@@ -85,6 +106,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/checkout-success': typeof CheckoutSuccessRoute
   '/create-listing': typeof CreateListingRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
@@ -98,6 +122,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/checkout-success': typeof CheckoutSuccessRoute
   '/create-listing': typeof CreateListingRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
@@ -112,6 +139,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/cart'
+    | '/checkout'
+    | '/checkout-success'
     | '/create-listing'
     | '/login'
     | '/marketplace'
@@ -124,6 +154,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/cart'
+    | '/checkout'
+    | '/checkout-success'
     | '/create-listing'
     | '/login'
     | '/marketplace'
@@ -136,6 +169,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/cart'
+    | '/checkout'
+    | '/checkout-success'
     | '/create-listing'
     | '/login'
     | '/marketplace'
@@ -149,6 +185,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
+  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
   CreateListingRoute: typeof CreateListingRoute
   LoginRoute: typeof LoginRoute
   MarketplaceRoute: typeof MarketplaceRoute
@@ -218,6 +257,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreateListingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout-success': {
+      id: '/checkout-success'
+      path: '/checkout-success'
+      fullPath: '/checkout-success'
+      preLoaderRoute: typeof CheckoutSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -237,6 +297,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
+  CheckoutSuccessRoute: CheckoutSuccessRoute,
   CreateListingRoute: CreateListingRoute,
   LoginRoute: LoginRoute,
   MarketplaceRoute: MarketplaceRoute,
@@ -250,3 +313,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
