@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CreditCard, Lock, ShieldCheck, Building2, Leaf, Wallet, Banknote } from "lucide-react";
 import { useState } from "react";
-import { MarketplaceHeader } from "@/components/marketplace-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,7 +33,6 @@ function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <MarketplaceHeader />
       <main className="mx-auto max-w-7xl px-6 py-10">
         <div className="mb-8 flex items-end justify-between">
           <div>

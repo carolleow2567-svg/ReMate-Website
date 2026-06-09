@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CheckCircle2, Download, Leaf, ArrowRight, Truck, FileText, Share2 } from "lucide-react";
-import { MarketplaceHeader } from "@/components/marketplace-header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Stepper } from "./cart";
@@ -32,7 +31,6 @@ function SuccessPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <MarketplaceHeader />
       <main className="mx-auto max-w-4xl px-6 py-10">
         <div className="mb-6 flex justify-end">
           <Stepper current={3} />

@@ -1,9 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Eye, EyeOff, Leaf, Recycle, ShieldCheck, Sparkles } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useAuth } from "@/lib/auth-context";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
@@ -22,6 +24,27 @@ export const Route = createFileRoute("/register")({
 function RegisterPage() {
   const [showPw, setShowPw] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const { register } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim() || !password || !confirm) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    if (password !== confirm) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    register({ name: name.trim(), email: email.trim() });
+    toast.success("Account created successfully!");
+    navigate({ to: "/login" });
+  };
 
   return (
     <div className="grid min-h-screen bg-background lg:grid-cols-2">
@@ -89,15 +112,28 @@ function RegisterPage() {
               </p>
             </div>
 
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <Label htmlFor="name">Full name</Label>
-                <Input id="name" placeholder="Encik Hafiz" className="h-11" />
+                <Input
+                  id="name"
+                  placeholder="Encik Hafiz"
+                  className="h-11"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="you@company.com" className="h-11" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@company.com"
+                  className="h-11"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
 
               <div className="space-y-2">
@@ -108,6 +144,8 @@ function RegisterPage() {
                     type={showPw ? "text" : "password"}
                     placeholder="At least 8 characters"
                     className="h-11 pr-10"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <button
                     type="button"
@@ -128,6 +166,8 @@ function RegisterPage() {
                     type={showConfirm ? "text" : "password"}
                     placeholder="Re-enter your password"
                     className="h-11 pr-10"
+                    value={confirm}
+                    onChange={(e) => setConfirm(e.target.value)}
                   />
                   <button
                     type="button"

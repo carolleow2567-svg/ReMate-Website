@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { MapPin, Mail, Phone, Building2, BadgeCheck, Calendar, Leaf, ArrowUpRight, Star } from "lucide-react";
-import { MarketplaceHeader } from "@/components/marketplace-header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -32,7 +31,6 @@ const TRANSACTIONS = [
 function ProfilePage() {
   return (
     <div className="min-h-screen bg-background">
-      <MarketplaceHeader />
       <main className="mx-auto max-w-7xl px-6 py-10">
         <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
           {/* Profile card */}
