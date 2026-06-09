@@ -23,6 +23,21 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const [showPw, setShowPw] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !password.trim()) {
+      toast.error("Please enter your email and password");
+      return;
+    }
+    login(email.trim());
+    toast.success(`Welcome back, ${email.split("@")[0]}!`);
+    navigate({ to: "/marketplace" });
+  };
 
   return (
     <div className="grid min-h-screen bg-background lg:grid-cols-2">
