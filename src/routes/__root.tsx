@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -11,6 +12,11 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { AuthProvider } from "../lib/auth-context";
+import { AppHeader, AppFooter } from "../components/app-layout";
+import { Toaster } from "../components/ui/sonner";
+
+const HIDE_CHROME = new Set<string>(["/login", "/register"]);
 
 function NotFoundComponent() {
   return (
@@ -118,8 +124,28 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <AuthProvider>
+        <AppShell />
+        <Toaster position="top-right" richColors />
+      </AuthProvider>
     </QueryClientProvider>
+  );
+}
+
+function AppShell() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const hideChrome = HIDE_CHROME.has(pathname);
+
+  if (hideChrome) {
+    return <Outlet />;
+  }
+  return (
+    <div className="flex min-h-screen flex-col bg-background">
+      <AppHeader />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <AppFooter />
+    </div>
   );
 }
