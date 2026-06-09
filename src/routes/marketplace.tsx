@@ -75,7 +75,7 @@ function MarketplacePage() {
                 Smart-matched for Johor Bahru
               </div>
               <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
-                Welcome back, Sara.
+                Welcome back
               </h1>
               <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground md:text-base">
                 12 new materials match your saved categories today. Keep your circular projects
