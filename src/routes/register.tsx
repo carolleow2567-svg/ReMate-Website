@@ -24,6 +24,27 @@ export const Route = createFileRoute("/register")({
 function RegisterPage() {
   const [showPw, setShowPw] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const { register } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim() || !password || !confirm) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    if (password !== confirm) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    register({ name: name.trim(), email: email.trim() });
+    toast.success("Account created successfully!");
+    navigate({ to: "/login" });
+  };
 
   return (
     <div className="grid min-h-screen bg-background lg:grid-cols-2">
