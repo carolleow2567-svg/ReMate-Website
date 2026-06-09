@@ -12,8 +12,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MarketplaceHeader } from "@/components/marketplace-header";
-import { SiteFooter } from "@/components/site-header";
 import { ListingCard } from "@/components/listing-card";
 import { LISTINGS } from "@/lib/listings";
 
@@ -66,7 +64,6 @@ function MarketplacePage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <MarketplaceHeader />
 
       <main className="mx-auto max-w-7xl px-6 py-10">
         {/* Welcome banner */}
@@ -252,7 +249,6 @@ function MarketplacePage() {
         </section>
       </main>
 
-      <SiteFooter />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { MapPin, Navigation, Layers, Search, Leaf, Truck, Filter } from "lucide-react";
-import { MarketplaceHeader } from "@/components/marketplace-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -55,7 +54,6 @@ function MapPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <MarketplaceHeader />
       <main className="mx-auto max-w-7xl px-6 py-6">
         <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>

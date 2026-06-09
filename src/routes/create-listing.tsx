@@ -24,8 +24,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { MarketplaceHeader } from "@/components/marketplace-header";
-import { SiteFooter } from "@/components/site-header";
 
 export const Route = createFileRoute("/create-listing")({
   head: () => ({
@@ -57,7 +55,6 @@ const CONDITIONS = [
 function CreateListingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <MarketplaceHeader />
 
       <main className="mx-auto max-w-5xl px-6 py-8">
         <Button asChild variant="ghost" size="sm" className="-ml-2">
@@ -288,7 +285,6 @@ function CreateListingPage() {
         </form>
       </main>
 
-      <SiteFooter />
     </div>
   );
 }

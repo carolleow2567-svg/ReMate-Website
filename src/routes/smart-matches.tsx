@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, Leaf, MapPin, TrendingUp, Zap, ArrowRight, Brain, Target, Recycle } from "lucide-react";
-import { MarketplaceHeader } from "@/components/marketplace-header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -137,7 +136,6 @@ const RECOMMENDATIONS = [
 function SmartMatchesPage() {
   return (
     <div className="min-h-screen bg-background">
-      <MarketplaceHeader />
       <main className="mx-auto max-w-7xl px-6 py-10">
         {/* Header */}
         <section className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-card via-accent/30 to-card p-8 shadow-sm">

@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Search, SlidersHorizontal, MapPin } from "lucide-react";
-import { MarketplaceHeader } from "@/components/marketplace-header";
-import { SiteFooter } from "@/components/site-header";
 import { ListingCard } from "@/components/listing-card";
 import { LISTINGS } from "@/lib/listings";
 import { Input } from "@/components/ui/input";
@@ -37,7 +35,6 @@ const GRADES = ["A", "B", "C"] as const;
 function SearchPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <MarketplaceHeader />
 
       {/* Search bar */}
       <div className="border-b border-border bg-card">
@@ -194,7 +191,6 @@ function SearchPage() {
         </div>
       </main>
 
-      <SiteFooter />
     </div>
   );
 }

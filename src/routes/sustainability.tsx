@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Leaf, TrendingUp, Recycle, Truck, Factory, Award, Target, Sparkles, ArrowUpRight } from "lucide-react";
-import { MarketplaceHeader } from "@/components/marketplace-header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -46,7 +45,6 @@ function SustainabilityPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <MarketplaceHeader />
       <main className="mx-auto max-w-7xl px-6 py-10">
         {/* Header */}
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">

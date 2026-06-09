@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Minus, Plus, Trash2, Leaf, ShieldCheck, ArrowRight, Truck } from "lucide-react";
-import { MarketplaceHeader } from "@/components/marketplace-header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -97,7 +96,6 @@ function CartPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <MarketplaceHeader />
       <main className="mx-auto max-w-7xl px-6 py-10">
         <div className="mb-8 flex items-end justify-between">
           <div>

@@ -17,8 +17,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { MarketplaceHeader } from "@/components/marketplace-header";
-import { SiteFooter } from "@/components/site-header";
 import { LISTINGS } from "@/lib/listings";
 
 export const Route = createFileRoute("/my-listings")({
@@ -91,7 +89,6 @@ function MyListingsPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <MarketplaceHeader />
 
       <main className="mx-auto max-w-7xl px-6 py-8">
         {/* Header */}
@@ -271,7 +268,6 @@ function MyListingsPage() {
         </Tabs>
       </main>
 
-      <SiteFooter />
     </div>
   );
 }

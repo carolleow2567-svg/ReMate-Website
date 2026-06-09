@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { SiteFooter, SiteHeader } from "@/components/site-header";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,7 +36,6 @@ export const Route = createFileRoute("/")({
 function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SiteHeader />
 
       {/* Hero */}
       <section className="relative overflow-hidden">
@@ -306,7 +304,6 @@ function LandingPage() {
         </div>
       </section>
 
-      <SiteFooter />
     </div>
   );
 }
