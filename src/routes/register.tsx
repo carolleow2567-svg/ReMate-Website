@@ -112,15 +112,28 @@ function RegisterPage() {
               </p>
             </div>
 
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <Label htmlFor="name">Full name</Label>
-                <Input id="name" placeholder="Encik Hafiz" className="h-11" />
+                <Input
+                  id="name"
+                  placeholder="Encik Hafiz"
+                  className="h-11"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="you@company.com" className="h-11" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@company.com"
+                  className="h-11"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
 
               <div className="space-y-2">
@@ -131,6 +144,8 @@ function RegisterPage() {
                     type={showPw ? "text" : "password"}
                     placeholder="At least 8 characters"
                     className="h-11 pr-10"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <button
                     type="button"
@@ -151,6 +166,8 @@ function RegisterPage() {
                     type={showConfirm ? "text" : "password"}
                     placeholder="Re-enter your password"
                     className="h-11 pr-10"
+                    value={confirm}
+                    onChange={(e) => setConfirm(e.target.value)}
                   />
                   <button
                     type="button"
