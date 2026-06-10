@@ -34,6 +34,7 @@ export type Listing = {
 export const LISTINGS: Listing[] = [
   {
     id: "chengal-offcuts-001",
+    image: timberDetail1.url,
     title: "Reclaimed Chengal Timber Offcuts",
     category: "Timber",
     qty: "320",
@@ -57,6 +58,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "steel-sheet-002",
+    image: steelSheet.url,
     title: "Galvanized Steel Sheet Cutoffs",
     category: "Metal",
     qty: "180",
@@ -80,6 +82,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "hdpe-drums-003",
+    image: hdpeDrum.url,
     title: "HDPE Drum Containers (food-safe)",
     category: "Plastics",
     qty: "45",
@@ -103,6 +106,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "clay-bricks-004",
+    image: clayBricks.url,
     title: "Salvaged Red Clay Bricks",
     category: "Construction",
     qty: "2400",
@@ -126,6 +130,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "pine-pallets-005",
+    image: pinePallets.url,
     title: "Pine Wood Pallets (heat-treated)",
     category: "Timber",
     qty: "120",
@@ -149,6 +154,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "copper-wire-006",
+    image: copperWire.url,
     title: "Stripped Copper Wire (Grade 1)",
     category: "Metal",
     qty: "62",
@@ -172,6 +178,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "pet-flakes-007",
+    image: petFlakes.url,
     title: "PET Bottle Flakes (clear)",
     category: "Plastics",
     qty: "540",
@@ -195,6 +202,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "concrete-blocks-008",
+    image: concreteBlocks.url,
     title: "Reclaimed Concrete Blocks",
     category: "Construction",
     qty: "850",

@@ -15,6 +15,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ListingCard } from "@/components/listing-card";
 import { LISTINGS } from "@/lib/listings";
 import timberMaterial from "@/assets/timber-material.jpg.asset.json";
+import scrapMetalMaterial from "@/assets/scrap-metal-material.jpg.asset.json";
+import recyclablePlasticMaterial from "@/assets/recyclable-plastic-material.jpeg.asset.json";
 
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
@@ -57,6 +59,7 @@ const CATEGORIES: Array<{
     desc: "Steel, copper, aluminium",
     icon: Wrench,
     bg: "linear-gradient(135deg, oklch(0.82 0.02 240), oklch(0.55 0.03 250))",
+    image: scrapMetalMaterial.url,
   },
   {
     key: "Plastics",
@@ -64,6 +67,7 @@ const CATEGORIES: Array<{
     desc: "HDPE, PET, flakes & drums",
     icon: Recycle,
     bg: "linear-gradient(135deg, oklch(0.85 0.05 200), oklch(0.55 0.09 195))",
+    image: recyclablePlasticMaterial.url,
   },
 ];
 
