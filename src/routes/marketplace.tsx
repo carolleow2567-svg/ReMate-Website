@@ -42,6 +42,7 @@ const CATEGORIES = [
     desc: "Hardwood offcuts, pallets, planks",
     icon: Hammer,
     bg: "linear-gradient(135deg, oklch(0.82 0.07 70), oklch(0.6 0.08 55))",
+    image: timberMaterial.url,
   },
   {
     key: "Metal",
