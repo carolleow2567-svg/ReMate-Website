@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ListingCard } from "@/components/listing-card";
 import { LISTINGS } from "@/lib/listings";
+import timberMaterial from "@/assets/timber-material.jpg.asset.json";
 
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
