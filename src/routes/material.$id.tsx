@@ -18,6 +18,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ListingCard } from "@/components/listing-card";
 import { getListing, LISTINGS } from "@/lib/listings";
+import timberDetail1 from "@/assets/timber-detail-1.jpg.asset.json";
+import timberDetail2 from "@/assets/timber-detail-2.jpg.asset.json";
+import timberDetail3 from "@/assets/timber-detail-3.jpg.asset.json";
+import timberDetail4 from "@/assets/timber-detail-4.jpg.asset.json";
+import timberDetail5 from "@/assets/timber-detail-5.jpg.asset.json";
+
+const GALLERY = [
+  timberDetail1.url,
+  timberDetail2.url,
+  timberDetail3.url,
+  timberDetail4.url,
+  timberDetail5.url,
+];
 
 export const Route = createFileRoute("/material/$id")({
   head: ({ params }) => {
