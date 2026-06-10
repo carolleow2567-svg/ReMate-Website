@@ -35,7 +35,14 @@ export const Route = createFileRoute("/marketplace")({
   component: MarketplacePage,
 });
 
-const CATEGORIES = [
+const CATEGORIES: Array<{
+  key: string;
+  label: string;
+  desc: string;
+  icon: typeof Hammer;
+  bg: string;
+  image?: string;
+}> = [
   {
     key: "Timber",
     label: "Surplus Timber & Wood",
@@ -58,7 +65,7 @@ const CATEGORIES = [
     icon: Recycle,
     bg: "linear-gradient(135deg, oklch(0.85 0.05 200), oklch(0.55 0.09 195))",
   },
-] as const;
+];
 
 function MarketplacePage() {
   const featured = LISTINGS.slice(0, 4);
