@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ListingCard } from "@/components/listing-card";
 import { LISTINGS } from "@/lib/listings";
+import timberMaterial from "@/assets/timber-material.jpg.asset.json";
 
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
@@ -34,13 +35,21 @@ export const Route = createFileRoute("/marketplace")({
   component: MarketplacePage,
 });
 
-const CATEGORIES = [
+const CATEGORIES: Array<{
+  key: string;
+  label: string;
+  desc: string;
+  icon: typeof Hammer;
+  bg: string;
+  image?: string;
+}> = [
   {
     key: "Timber",
     label: "Surplus Timber & Wood",
     desc: "Hardwood offcuts, pallets, planks",
     icon: Hammer,
     bg: "linear-gradient(135deg, oklch(0.82 0.07 70), oklch(0.6 0.08 55))",
+    image: timberMaterial.url,
   },
   {
     key: "Metal",
@@ -56,7 +65,7 @@ const CATEGORIES = [
     icon: Recycle,
     bg: "linear-gradient(135deg, oklch(0.85 0.05 200), oklch(0.55 0.09 195))",
   },
-] as const;
+];
 
 function MarketplacePage() {
   const featured = LISTINGS.slice(0, 4);
@@ -151,8 +160,16 @@ function MarketplacePage() {
                   to="/search"
                   className="group overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
                 >
-                  <div className="relative h-32" style={{ background: cat.bg }}>
-                    <span className="absolute right-3 top-3 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium text-foreground shadow-sm">
+                  <div className="relative h-32 overflow-hidden" style={{ background: cat.bg }}>
+                    {cat.image && (
+                      <img
+                        src={cat.image}
+                        alt={cat.label}
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    )}
+                    <span className="absolute right-3 top-3 z-10 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium text-foreground shadow-sm">
                       {count} live
                     </span>
                   </div>

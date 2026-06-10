@@ -18,6 +18,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ListingCard } from "@/components/listing-card";
 import { getListing, LISTINGS } from "@/lib/listings";
+import timberDetail1 from "@/assets/timber-detail-1.jpg.asset.json";
+import timberDetail2 from "@/assets/timber-detail-2.jpg.asset.json";
+import timberDetail3 from "@/assets/timber-detail-3.jpg.asset.json";
+import timberDetail4 from "@/assets/timber-detail-4.jpg.asset.json";
+import timberDetail5 from "@/assets/timber-detail-5.jpg.asset.json";
+
+const GALLERY = [
+  timberDetail1.url,
+  timberDetail2.url,
+  timberDetail3.url,
+  timberDetail4.url,
+  timberDetail5.url,
+];
 
 export const Route = createFileRoute("/material/$id")({
   head: ({ params }) => {
@@ -109,22 +122,31 @@ function MaterialDetailsPage() {
         {/* Image gallery */}
         <section className="mt-6 grid gap-3 md:grid-cols-4 md:grid-rows-2">
           <div
-            className="relative md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto rounded-2xl"
+            className="relative md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto overflow-hidden rounded-2xl border border-border shadow-sm"
             style={{ background: listing.bg }}
           >
-            <span className="absolute left-4 top-4 rounded-full bg-card/90 px-2.5 py-1 text-xs font-medium text-foreground shadow-sm backdrop-blur">
+            <img
+              src={GALLERY[0]}
+              alt={listing.title}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <span className="absolute left-4 top-4 z-10 rounded-full bg-card/90 px-2.5 py-1 text-xs font-medium text-foreground shadow-sm backdrop-blur">
               {listing.category}
             </span>
           </div>
-          {[0, 1, 2, 3].map((i) => (
+          {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
-              className="aspect-[4/3] rounded-xl"
-              style={{
-                background: listing.bg,
-                filter: `hue-rotate(${i * 12}deg) brightness(${1 - i * 0.04})`,
-              }}
-            />
+              className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border shadow-sm"
+              style={{ background: listing.bg }}
+            >
+              <img
+                src={GALLERY[i]}
+                alt={`${listing.title} — view ${i + 1}`}
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
           ))}
         </section>
 
