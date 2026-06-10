@@ -1,3 +1,12 @@
+import timberDetail1 from "@/assets/timber-detail-1.jpg.asset.json";
+import steelSheet from "@/assets/galvanized-steel-sheet-cutoffs-smart-match.jpg.asset.json";
+import hdpeDrum from "@/assets/hdpe-drum-containers-smart-match.jpg.asset.json";
+import clayBricks from "@/assets/salvaged-red-clay-bricks-smart-match.jpg.asset.json";
+import pinePallets from "@/assets/pine-wood-pallets-recently.jpg.asset.json";
+import copperWire from "@/assets/stripped-coppper-wire-recently.jpg.asset.json";
+import petFlakes from "@/assets/pet-bottle-flakes-recently.jpg.asset.json";
+import concreteBlocks from "@/assets/reclaimed-concrete-block-recently.jpg.asset.json";
+
 export type Listing = {
   id: string;
   title: string;
@@ -10,6 +19,7 @@ export type Listing = {
   grade: "A" | "B" | "C";
   co2: string;
   bg: string;
+  image?: string;
   provider: {
     name: string;
     type: string;
