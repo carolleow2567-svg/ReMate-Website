@@ -11,11 +11,19 @@ export function ListingCard({ listing }: { listing: Listing }) {
       className="group block focus:outline-none"
     >
       <Card className="overflow-hidden border-border shadow-sm transition-all group-hover:-translate-y-0.5 group-hover:shadow-md group-focus-visible:ring-2 group-focus-visible:ring-ring">
-        <div className="relative aspect-[4/3] w-full" style={{ background: listing.bg }}>
-          <span className="absolute left-3 top-3 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium text-foreground shadow-sm backdrop-blur">
+        <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ background: listing.bg }}>
+          {listing.image && (
+            <img
+              src={listing.image}
+              alt={listing.title}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+          )}
+          <span className="absolute left-3 top-3 z-10 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium text-foreground shadow-sm backdrop-blur">
             Condition {listing.grade}
           </span>
-          <span className="absolute right-3 top-3 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium text-foreground shadow-sm backdrop-blur">
+          <span className="absolute right-3 top-3 z-10 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium text-foreground shadow-sm backdrop-blur">
             {listing.category}
           </span>
         </div>
