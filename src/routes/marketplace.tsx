@@ -153,8 +153,16 @@ function MarketplacePage() {
                   to="/search"
                   className="group overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
                 >
-                  <div className="relative h-32" style={{ background: cat.bg }}>
-                    <span className="absolute right-3 top-3 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium text-foreground shadow-sm">
+                  <div className="relative h-32 overflow-hidden" style={{ background: cat.bg }}>
+                    {cat.image && (
+                      <img
+                        src={cat.image}
+                        alt={cat.label}
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    )}
+                    <span className="absolute right-3 top-3 z-10 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium text-foreground shadow-sm">
                       {count} live
                     </span>
                   </div>
