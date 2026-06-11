@@ -12,6 +12,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import timberDetail1 from "@/assets/timber-detail-1.jpg.asset.json";
+import galvanizedSteel from "@/assets/galvanized-steel-sheet-cutoffs-smart-match.jpg.asset.json";
+import hdpeDrum from "@/assets/hdpe-drum-containers-smart-match.jpg.asset.json";
+import salvagedBricks from "@/assets/salvaged-red-clay-bricks-smart-match.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -239,10 +243,13 @@ function LandingPage() {
                 key={l.title}
                 className="overflow-hidden border-border shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
               >
-                <div
-                  className="relative aspect-[4/3] w-full"
-                  style={{ background: l.bg }}
-                >
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+                  <img
+                    src={l.image}
+                    alt={l.title}
+                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                    loading="lazy"
+                  />
                   <span className="absolute left-3 top-3 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium text-foreground shadow-sm backdrop-blur">
                     Condition {l.grade}
                   </span>
@@ -317,7 +324,7 @@ const LISTINGS = [
     price: "RM 1.80/kg",
     grade: "A",
     co2: "112",
-    bg: "linear-gradient(135deg, oklch(0.78 0.06 60), oklch(0.55 0.09 50))",
+    image: timberDetail1.url,
   },
   {
     title: "Galvanized Steel Sheet Cutoffs",
@@ -327,7 +334,7 @@ const LISTINGS = [
     price: "RM 3.20/kg",
     grade: "A",
     co2: "240",
-    bg: "linear-gradient(135deg, oklch(0.82 0.02 240), oklch(0.55 0.03 250))",
+    image: galvanizedSteel.url,
   },
   {
     title: "HDPE Drum Containers (food-safe)",
@@ -337,7 +344,7 @@ const LISTINGS = [
     price: "RM 18/unit",
     grade: "B",
     co2: "86",
-    bg: "linear-gradient(135deg, oklch(0.85 0.05 200), oklch(0.55 0.09 195))",
+    image: hdpeDrum.url,
   },
   {
     title: "Salvaged Red Clay Bricks",
@@ -347,6 +354,6 @@ const LISTINGS = [
     price: "RM 0.45/pc",
     grade: "B",
     co2: "320",
-    bg: "linear-gradient(135deg, oklch(0.7 0.08 35), oklch(0.45 0.1 30))",
+    image: salvagedBricks.url,
   },
 ];
