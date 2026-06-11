@@ -243,10 +243,13 @@ function LandingPage() {
                 key={l.title}
                 className="overflow-hidden border-border shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
               >
-                <div
-                  className="relative aspect-[4/3] w-full"
-                  style={{ background: l.bg }}
-                >
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+                  <img
+                    src={l.image}
+                    alt={l.title}
+                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                    loading="lazy"
+                  />
                   <span className="absolute left-3 top-3 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium text-foreground shadow-sm backdrop-blur">
                     Condition {l.grade}
                   </span>
