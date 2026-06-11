@@ -324,7 +324,7 @@ const LISTINGS = [
     price: "RM 1.80/kg",
     grade: "A",
     co2: "112",
-    bg: "linear-gradient(135deg, oklch(0.78 0.06 60), oklch(0.55 0.09 50))",
+    image: timberDetail1.url,
   },
   {
     title: "Galvanized Steel Sheet Cutoffs",
@@ -334,7 +334,7 @@ const LISTINGS = [
     price: "RM 3.20/kg",
     grade: "A",
     co2: "240",
-    bg: "linear-gradient(135deg, oklch(0.82 0.02 240), oklch(0.55 0.03 250))",
+    image: galvanizedSteel.url,
   },
   {
     title: "HDPE Drum Containers (food-safe)",
@@ -344,7 +344,7 @@ const LISTINGS = [
     price: "RM 18/unit",
     grade: "B",
     co2: "86",
-    bg: "linear-gradient(135deg, oklch(0.85 0.05 200), oklch(0.55 0.09 195))",
+    image: hdpeDrum.url,
   },
   {
     title: "Salvaged Red Clay Bricks",
@@ -354,6 +354,6 @@ const LISTINGS = [
     price: "RM 0.45/pc",
     grade: "B",
     co2: "320",
-    bg: "linear-gradient(135deg, oklch(0.7 0.08 35), oklch(0.45 0.1 30))",
+    image: salvagedBricks.url,
   },
 ];
