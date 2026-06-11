@@ -12,6 +12,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import timberDetail1 from "@/assets/timber-detail-1.jpg.asset.json";
+import galvanizedSteel from "@/assets/galvanized-steel-sheet-cutoffs-smart-match.jpg.asset.json";
+import hdpeDrum from "@/assets/hdpe-drum-containers-smart-match.jpg.asset.json";
+import salvagedBricks from "@/assets/salvaged-red-clay-bricks-smart-match.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
