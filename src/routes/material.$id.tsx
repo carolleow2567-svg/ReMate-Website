@@ -18,19 +18,31 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ListingCard } from "@/components/listing-card";
 import { getListing, LISTINGS } from "@/lib/listings";
-import timberDetail1 from "@/assets/timber-detail-1.jpg.asset.json";
-import timberDetail2 from "@/assets/timber-detail-2.jpg.asset.json";
-import timberDetail3 from "@/assets/timber-detail-3.jpg.asset.json";
-import timberDetail4 from "@/assets/timber-detail-4.jpg.asset.json";
-import timberDetail5 from "@/assets/timber-detail-5.jpg.asset.json";
+import { getMaterialGallery } from "@/lib/material-galleries";
 
-const GALLERY = [
-  timberDetail1.url,
-  timberDetail2.url,
-  timberDetail3.url,
-  timberDetail4.url,
-  timberDetail5.url,
-];
+const MATERIAL_GALERIES: Record<string, string[]> = {
+  Timber: [
+    "/images/materials/timber-detail-1.jpg",
+    "/images/materials/timber-detail-2.jpg",
+    "/images/materials/timber-detail-3.jpg",
+    "/images/materials/timber-detail-4.jpg",
+    "/images/materials/timber-detail-5.jpg",
+  ],
+  Metal: [
+    "/images/materials/metal-detail-1.jpg",
+    "/images/materials/metal-detail-2.jpg",
+    "/images/materials/metal-detail-3.jpg",
+    "/images/materials/metal-detail-4.jpg",
+    "/images/materials/metal-detail-5.jpg",
+  ],
+  Plastics: [
+    "/images/materials/plastic-detail-1.jpg",
+    "/images/materials/plastic-detail-2.jpg",
+    "/images/materials/plastic-detail-3.jpg",
+    "/images/materials/plastic-detail-4.jpg",
+    "/images/materials/plastic-detail-5.jpg",
+  ],
+};
 
 export const Route = createFileRoute("/material/$id")({
   head: ({ params }) => {
@@ -70,6 +82,7 @@ export const Route = createFileRoute("/material/$id")({
 
 function MaterialDetailsPage() {
   const { listing } = Route.useLoaderData();
+  const gallery = getMaterialGallery(listing.category);
   const related = LISTINGS.filter(
     (l) => l.category === listing.category && l.id !== listing.id,
   ).slice(0, 4);
@@ -126,7 +139,7 @@ function MaterialDetailsPage() {
             style={{ background: listing.bg }}
           >
             <img
-              src={GALLERY[0]}
+              src={gallery[0]}
               alt={listing.title}
               className="absolute inset-0 h-full w-full object-cover"
             />
@@ -141,7 +154,7 @@ function MaterialDetailsPage() {
               style={{ background: listing.bg }}
             >
               <img
-                src={GALLERY[i]}
+                src={gallery[i]}
                 alt={`${listing.title} — view ${i + 1}`}
                 className="absolute inset-0 h-full w-full object-cover"
                 loading="lazy"

@@ -42,7 +42,7 @@ function RegisterPage() {
       return;
     }
     register({ name: name.trim(), email: email.trim() });
-    toast.success("Account created successfully!");
+    toast.success("Registration successful. Please log in.");
     navigate({ to: "/login" });
   };
 

@@ -7,6 +7,8 @@ import { toast } from "sonner";
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/marketplace", label: "Marketplace" },
+  { to: "/sustainability", label: "Sustainability" },
+  { to: "/cart", label: "Cart" },
   { to: "/profile", label: "Profile" },
 ] as const;
 

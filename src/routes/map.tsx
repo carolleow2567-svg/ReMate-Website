@@ -62,7 +62,10 @@ function MapPage() {
               7 reclaimable listings within 80 km · Sorted by proximity and impact density
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <Button asChild variant="outline" size="sm">
+              <Link to="/marketplace">← Return to Marketplace</Link>
+            </Button>
             <div className="relative">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input placeholder="Search a city or postcode" className="w-72 pl-9" defaultValue="Batu Pahat, Johor" />

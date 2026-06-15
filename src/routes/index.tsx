@@ -12,10 +12,16 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import timberDetail1 from "@/assets/timber-detail-1.jpg.asset.json";
-import galvanizedSteel from "@/assets/galvanized-steel-sheet-cutoffs-smart-match.jpg.asset.json";
-import hdpeDrum from "@/assets/hdpe-drum-containers-smart-match.jpg.asset.json";
-import salvagedBricks from "@/assets/salvaged-red-clay-bricks-smart-match.jpg.asset.json";
+
+// Local public asset paths for Vite - named to match product labels
+const ASSET_PATHS = {
+  timber: "/images/timber-material.jpg",
+  metal: "/images/scrap-metal-material.jpg",
+  container: "/images/recyclable-plastic-material.jpeg",
+  bricks: "/images/salvaged-red-clay-bricks-smart-match.jpg",
+  steelSheet: "/images/galvanized-steel-sheet-cutoffs-smart-match.jpg",
+  hdpeDrum: "/images/hdpe-drum-containers-smart-match.jpg",
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -324,7 +330,7 @@ const LISTINGS = [
     price: "RM 1.80/kg",
     grade: "A",
     co2: "112",
-    image: timberDetail1.url,
+    image: ASSET_PATHS.timber,
   },
   {
     title: "Galvanized Steel Sheet Cutoffs",
@@ -334,7 +340,7 @@ const LISTINGS = [
     price: "RM 3.20/kg",
     grade: "A",
     co2: "240",
-    image: galvanizedSteel.url,
+    image: ASSET_PATHS.steelSheet,
   },
   {
     title: "HDPE Drum Containers (food-safe)",
@@ -344,7 +350,7 @@ const LISTINGS = [
     price: "RM 18/unit",
     grade: "B",
     co2: "86",
-    image: hdpeDrum.url,
+    image: ASSET_PATHS.hdpeDrum,
   },
   {
     title: "Salvaged Red Clay Bricks",
@@ -354,6 +360,6 @@ const LISTINGS = [
     price: "RM 0.45/pc",
     grade: "B",
     co2: "320",
-    image: salvagedBricks.url,
+    image: ASSET_PATHS.bricks,
   },
 ];

@@ -1,11 +1,12 @@
-import timberDetail1 from "@/assets/timber-detail-1.jpg.asset.json";
-import steelSheet from "@/assets/galvanized-steel-sheet-cutoffs-smart-match.jpg.asset.json";
-import hdpeDrum from "@/assets/hdpe-drum-containers-smart-match.jpg.asset.json";
-import clayBricks from "@/assets/salvaged-red-clay-bricks-smart-match.jpg.asset.json";
-import pinePallets from "@/assets/pine-wood-pallets-recently.jpg.asset.json";
-import copperWire from "@/assets/stripped-coppper-wire-recently.jpg.asset.json";
-import petFlakes from "@/assets/pet-bottle-flakes-recently.jpg.asset.json";
-import concreteBlocks from "@/assets/reclaimed-concrete-block-recently.jpg.asset.json";
+// Local public asset paths for Vite - named to match product labels
+const ASSET_PATHS = {
+  timber: "/images/timber-material.jpg",
+  metal: "/images/scrap-metal-material.jpg",
+  container: "/images/recyclable-plastic-material.jpeg",
+  bricks: "/images/salvaged-red-clay-bricks-smart-match.jpg",
+  hdpeDrum: "/images/hdpe-drum-containers-smart-match.jpg",
+  steelSheet: "/images/galvanized-steel-sheet-cutoffs-smart-match.jpg",
+};
 
 export type Listing = {
   id: string;
@@ -34,7 +35,7 @@ export type Listing = {
 export const LISTINGS: Listing[] = [
   {
     id: "chengal-offcuts-001",
-    image: timberDetail1.url,
+    image: ASSET_PATHS.timber,
     title: "Reclaimed Chengal Timber Offcuts",
     category: "Timber",
     qty: "320",
@@ -58,7 +59,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "steel-sheet-002",
-    image: steelSheet.url,
+    image: ASSET_PATHS.steelSheet,
     title: "Galvanized Steel Sheet Cutoffs",
     category: "Metal",
     qty: "180",
@@ -82,7 +83,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "hdpe-drums-003",
-    image: hdpeDrum.url,
+    image: ASSET_PATHS.hdpeDrum,
     title: "HDPE Drum Containers (food-safe)",
     category: "Plastics",
     qty: "45",
@@ -106,7 +107,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "clay-bricks-004",
-    image: clayBricks.url,
+    image: ASSET_PATHS.bricks,
     title: "Salvaged Red Clay Bricks",
     category: "Construction",
     qty: "2400",
@@ -130,7 +131,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "pine-pallets-005",
-    image: pinePallets.url,
+    image: ASSET_PATHS.timber,
     title: "Pine Wood Pallets (heat-treated)",
     category: "Timber",
     qty: "120",
@@ -154,7 +155,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "copper-wire-006",
-    image: copperWire.url,
+    image: ASSET_PATHS.metal,
     title: "Stripped Copper Wire (Grade 1)",
     category: "Metal",
     qty: "62",
@@ -178,7 +179,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "pet-flakes-007",
-    image: petFlakes.url,
+    image: ASSET_PATHS.container,
     title: "PET Bottle Flakes (clear)",
     category: "Plastics",
     qty: "540",
@@ -202,7 +203,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: "concrete-blocks-008",
-    image: concreteBlocks.url,
+    image: ASSET_PATHS.bricks,
     title: "Reclaimed Concrete Blocks",
     category: "Construction",
     qty: "850",

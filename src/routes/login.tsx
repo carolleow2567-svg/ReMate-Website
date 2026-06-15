@@ -34,8 +34,12 @@ function LoginPage() {
       toast.error("Please enter your email and password");
       return;
     }
+    localStorage.setItem(
+      "remateSession",
+      JSON.stringify({ isLoggedIn: true, user: "Demo User" })
+    );
     login(email.trim());
-    toast.success(`Welcome back, ${email.split("@")[0]}!`);
+    toast.success("Login successful");
     navigate({ to: "/marketplace" });
   };
 

@@ -14,9 +14,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ListingCard } from "@/components/listing-card";
 import { LISTINGS } from "@/lib/listings";
-import timberMaterial from "@/assets/timber-material.jpg.asset.json";
-import scrapMetalMaterial from "@/assets/scrap-metal-material.jpg.asset.json";
-import recyclablePlasticMaterial from "@/assets/recyclable-plastic-material.jpeg.asset.json";
+
+// Local public asset paths for Vite - named to match product labels
+const ASSET_PATHS = {
+  timber: "/images/timber-material.jpg",
+  metal: "/images/scrap-metal-material.jpg",
+  container: "/images/recyclable-plastic-material.jpeg",
+};
 
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
@@ -51,7 +55,7 @@ const CATEGORIES: Array<{
     desc: "Hardwood offcuts, pallets, planks",
     icon: Hammer,
     bg: "linear-gradient(135deg, oklch(0.82 0.07 70), oklch(0.6 0.08 55))",
-    image: timberMaterial.url,
+    image: ASSET_PATHS.timber,
   },
   {
     key: "Metal",
@@ -59,7 +63,7 @@ const CATEGORIES: Array<{
     desc: "Steel, copper, aluminium",
     icon: Wrench,
     bg: "linear-gradient(135deg, oklch(0.82 0.02 240), oklch(0.55 0.03 250))",
-    image: scrapMetalMaterial.url,
+    image: ASSET_PATHS.metal,
   },
   {
     key: "Plastics",
@@ -67,7 +71,7 @@ const CATEGORIES: Array<{
     desc: "HDPE, PET, flakes & drums",
     icon: Recycle,
     bg: "linear-gradient(135deg, oklch(0.85 0.05 200), oklch(0.55 0.09 195))",
-    image: recyclablePlasticMaterial.url,
+    image: ASSET_PATHS.container,
   },
 ];
 
@@ -97,7 +101,7 @@ function MarketplacePage() {
             </div>
             <div className="flex flex-col gap-2 sm:flex-row md:flex-col md:items-end">
               <Button asChild size="lg" className="h-11 px-5">
-                <Link to="/marketplace">
+                <Link to="/create-listing">
                   <Plus className="h-4 w-4" /> Create a listing
                 </Link>
               </Button>
@@ -197,6 +201,12 @@ function MarketplacePage() {
           </div>
         </section>
 
+        <div className="mt-8 flex justify-end">
+          <Button asChild variant="outline" size="sm">
+            <Link to="/map">🌐 View Nearby on Map</Link>
+          </Button>
+        </div>
+
         {/* Featured listings */}
         <section className="mt-14">
           <div className="flex items-end justify-between">
@@ -209,7 +219,7 @@ function MarketplacePage() {
               </h2>
             </div>
             <Button asChild variant="ghost" size="sm">
-              <Link to="/search">
+              <Link to="/smart-matches">
                 View all <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
@@ -257,7 +267,7 @@ function MarketplacePage() {
               </div>
               <div className="flex flex-col gap-2 md:items-end">
                 <Button asChild size="lg" variant="secondary" className="h-11 px-6">
-                  <Link to="/marketplace">
+                  <Link to="/create-listing">
                     <Plus className="h-4 w-4" /> Create a listing
                   </Link>
                 </Button>
