@@ -32,7 +32,7 @@ function ProfilePage() {
   return (
     <div className="min-h-screen bg-background">
       <main className="mx-auto max-w-7xl px-6 py-10">
-        <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
+        <div className="grid gap-6 lg:grid-cols-[minmax(280px,360px)_1fr]">
           {/* Profile card */}
           <aside className="space-y-6">
             <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
@@ -109,16 +109,16 @@ function ProfilePage() {
           {/* Right column */}
           <section className="space-y-6">
             <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <h2 className="text-base font-semibold text-foreground">Activity summary</h2>
                   <p className="text-sm text-muted-foreground">A snapshot of your circular marketplace performance.</p>
                 </div>
-                <Button variant="ghost" size="sm" asChild>
+                <Button variant="ghost" size="sm" asChild className="self-start shrink-0">
                   <Link to="/my-listings">Manage listings <ArrowUpRight className="h-4 w-4" /></Link>
                 </Button>
               </div>
-              <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-5 grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
                 {ACTIVITY.map((a) => (
                   <div key={a.label} className="rounded-xl border border-border bg-background p-4">
                     <p className="text-xs uppercase tracking-wide text-muted-foreground">{a.label}</p>
@@ -130,41 +130,41 @@ function ProfilePage() {
             </div>
 
             <div className="rounded-2xl border border-border bg-card shadow-sm">
-              <div className="flex items-center justify-between border-b border-border px-6 py-4">
+              <div className="flex flex-col gap-3 border-b border-border px-4 py-4 sm:flex-row sm:items-start sm:justify-between sm:px-6">
                 <div>
                   <h2 className="text-base font-semibold text-foreground">Recent transactions</h2>
                   <p className="text-sm text-muted-foreground">Last 5 matched exchanges across your account.</p>
                 </div>
-                <Button variant="outline" size="sm">Export CSV</Button>
+                <Button variant="outline" size="sm" className="self-start shrink-0">Export CSV</Button>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead className="bg-muted/40 text-left text-xs uppercase tracking-wide text-muted-foreground">
                     <tr>
-                      <th className="px-6 py-3 font-medium">Ref</th>
-                      <th className="px-6 py-3 font-medium">Material</th>
-                      <th className="px-6 py-3 font-medium">Counterparty</th>
-                      <th className="px-6 py-3 font-medium">Weight</th>
-                      <th className="px-6 py-3 font-medium">Impact</th>
-                      <th className="px-6 py-3 font-medium">Status</th>
+                      <th className="px-3 py-3 font-medium sm:px-6">Ref</th>
+                      <th className="px-3 py-3 font-medium sm:px-6">Material</th>
+                      <th className="hidden px-3 py-3 font-medium sm:table-cell sm:px-6">Counterparty</th>
+                      <th className="px-3 py-3 font-medium sm:px-6">Weight</th>
+                      <th className="hidden px-3 py-3 font-medium sm:table-cell sm:px-6">Impact</th>
+                      <th className="px-3 py-3 font-medium sm:px-6">Status</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
                     {TRANSACTIONS.map((t) => (
                       <tr key={t.id} className="hover:bg-muted/30">
-                        <td className="px-6 py-4 font-mono text-xs text-muted-foreground">{t.id}</td>
-                        <td className="px-6 py-4">
+                        <td className="px-3 py-4 font-mono text-xs text-muted-foreground sm:px-6">{t.id}</td>
+                        <td className="px-3 py-4 sm:px-6">
                           <p className="font-medium text-foreground">{t.material}</p>
                           <p className="text-xs text-muted-foreground">{t.date} · {t.role}</p>
                         </td>
-                        <td className="px-6 py-4 text-foreground">{t.party}</td>
-                        <td className="px-6 py-4 text-foreground">{t.weight}</td>
-                        <td className="px-6 py-4">
+                        <td className="hidden px-3 py-4 text-foreground sm:table-cell sm:px-6">{t.party}</td>
+                        <td className="px-3 py-4 text-foreground sm:px-6">{t.weight}</td>
+                        <td className="hidden px-3 py-4 sm:table-cell sm:px-6">
                           <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-xs font-medium text-accent-foreground">
                             <Leaf className="h-3 w-3" /> {t.impact}
                           </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-3 py-4 sm:px-6">
                           <Badge variant={t.status === "Completed" ? "secondary" : "outline"}>{t.status}</Badge>
                         </td>
                       </tr>
