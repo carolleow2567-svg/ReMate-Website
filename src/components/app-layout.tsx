@@ -39,18 +39,13 @@ export function AppHeader() {
             </SheetTrigger>
             <SheetContent side="left" className="w-[260px] p-0">
               <div className="flex h-full flex-col">
-                <div className="flex items-center justify-between border-b px-4 py-4">
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                      <Leaf className="h-3.5 w-3.5" />
-                    </span>
-                    <span className="text-sm font-semibold tracking-tight text-foreground">
-                      ReMate
-                    </span>
-                  </div>
-                  <SheetClose className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground">
-                    <X className="h-4 w-4" />
-                  </SheetClose>
+                <div className="flex items-center gap-2 border-b px-4 py-4">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                    <Leaf className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="text-sm font-semibold tracking-tight text-foreground">
+                    ReMate
+                  </span>
                 </div>
                 <nav className="flex flex-col gap-1 px-3 py-4">
                   {NAV.map((item) => {
