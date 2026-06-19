@@ -151,9 +151,9 @@ function CartPage() {
                       </button>
                     </div>
 
-                    <div className="mt-auto flex items-end justify-between pt-4">
-                      <div className="flex items-center gap-3">
-                        <div className="inline-flex items-center rounded-lg border border-border">
+                    <div className="mt-auto flex flex-col gap-3 pt-4 sm:flex-row sm:items-end sm:justify-between">
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+                        <div className="inline-flex items-center rounded-lg border border-border self-start sm:self-auto">
                           <button
                             onClick={() => update(i.id, -1)}
                             className="flex h-8 w-8 items-center justify-center text-muted-foreground hover:text-foreground"
@@ -176,7 +176,7 @@ function CartPage() {
                           {i.unit} · RM {i.unitPrice.toFixed(2)} each
                         </span>
                       </div>
-                      <div className="text-right">
+                      <div className="text-left sm:text-right">
                         <p className="text-base font-semibold text-foreground">
                           RM {(i.qty * i.unitPrice).toFixed(2)}
                         </p>
