@@ -2,8 +2,5 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "outputDirectory": ".vercel/output",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "outputDirectory": ".vercel/output"
 }
