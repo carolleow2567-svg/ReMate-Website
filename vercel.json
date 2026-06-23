@@ -2,7 +2,7 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "outputDirectory": ".output/public",
+  "outputDirectory": ".vercel/output",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
